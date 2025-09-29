@@ -1,6 +1,7 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
-import MenuItemCard from "../../components/MenuItemCard";
+import { FlatList, Text, View, StyleSheet, Pressable } from "react-native";
 import { useCart } from "../../context/CartContext";
+import MenuItemCard from "../../components/MenuItemCard";
+import { useRouter } from "expo-router";
 
 const menuItems = [
   { id: "1", name: "番茄炒蛋" },
@@ -9,11 +10,21 @@ const menuItems = [
 ];
 
 export default function MenuScreen() {
-  const { addToCart, removeFromCart, cart } = useCart();
+  const { cart, addToCart, removeFromCart } = useCart();
+  const router = useRouter();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>吃啥呢 · FanTime</Text>
+      <Text style={styles.title}>菜单</Text>
+
+      {/* 🔙 返回身份选择 */}
+      <Pressable
+        style={styles.backButton}
+        onPress={() => router.push("/")}
+      >
+        <Text style={styles.backText}>返回身份选择</Text>
+      </Pressable>
+
       <FlatList
         data={menuItems}
         renderItem={({ item }) => {
@@ -34,6 +45,15 @@ export default function MenuScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: "#fff" },
+  container: { flex: 1, backgroundColor: "#fff", padding: 16 },
   title: { fontSize: 24, fontWeight: "bold", marginBottom: 20 },
+  backButton: {
+    marginBottom: 20,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    backgroundColor: "#ccc",
+    borderRadius: 8,
+    alignSelf: "flex-start", // 👈 让按钮靠左
+  },
+  backText: { fontSize: 16, color: "#333" },
 });
