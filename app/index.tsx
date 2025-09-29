@@ -1,5 +1,5 @@
 // app/index.tsx
-import { View, Text, Pressable, StyleSheet } from "react-native";
+import { View, Text, Pressable, StyleSheet, Image } from "react-native";
 import { useRouter } from "expo-router";
 
 export default function HomeScreen() {
@@ -7,7 +7,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>👋 欢迎使用 FanTime</Text>
+       <Image source={require("../assets/logo.png")} style={styles.logo} />
 
       <Pressable style={styles.button} onPress={() => router.push("/eat")}>
         <Text style={styles.buttonText}>🍽️ 点餐端</Text>
@@ -21,7 +21,8 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center" },
+  container: { flex: 1, justifyContent: "center", alignItems: "center",backgroundColor: "#fff"},
+  logo: { width: 520, height: 520, resizeMode: "contain", marginBottom: 30 }, 
   title: { fontSize: 24, fontWeight: "bold", marginBottom: 30 },
   button: {
     marginVertical: 10,

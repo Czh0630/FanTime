@@ -22,7 +22,7 @@ export default function SuccessScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center", padding: 16 },
+  container: { flex: 1, justifyContent: "center", alignItems: "center", padding: 16, backgroundColor: "#fff",},
   emoji: { fontSize: 64, marginBottom: 20 },
   title: { fontSize: 24, fontWeight: "bold", marginBottom: 10 },
   subtitle: { fontSize: 16, color: "#666", marginBottom: 30, textAlign: "center" },

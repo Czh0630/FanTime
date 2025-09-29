@@ -1,6 +1,6 @@
-// firebaseConfig.ts
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getAuth, signInAnonymously } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAhKx9bAdfk5xgj8FfyhlEkxyIBcguhuiE",
@@ -10,6 +10,8 @@ const firebaseConfig = {
   messagingSenderId: "236158024623",
   appId: "1:236158024623:web:3e1aed510f0eb1a2528d5a",
 };
-
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
+export const auth = getAuth(app);
+
+signInAnonymously(auth).catch(console.error);

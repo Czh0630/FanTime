@@ -1,6 +1,6 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 import { useCart } from "../../context/CartContext";
-import { db } from "../../firebaseConfig";
+import { db, auth } from "../../firebaseConfig"; // 👈 import auth
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { useRouter } from "expo-router";
 
@@ -16,7 +16,7 @@ export default function CheckoutScreen() {
       }
 
       await addDoc(collection(db, "orders"), {
-        user: "Guest",
+        user: auth.currentUser?.uid || "Guest", 
         status: "pending",
         items: cart.map((c) => ({
           id: c.id,
@@ -28,7 +28,7 @@ export default function CheckoutScreen() {
 
       clearCart();
       alert("✅ Order placed!");
-      router.push("/eat/success"); // success page
+      router.push("/eat/success");
     } catch (error: any) {
       console.error("🔥 Firestore error:", error);
       alert("❌ Failed to place order: " + error.message);
@@ -57,7 +57,7 @@ export default function CheckoutScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16 },
+  container: { flex: 1, padding: 16, backgroundColor: "#fff",},
   title: { fontSize: 22, fontWeight: "bold", marginBottom: 16 },
   button: {
     marginTop: 20,

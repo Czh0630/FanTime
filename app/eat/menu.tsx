@@ -4,9 +4,12 @@ import { useCart } from "../../context/CartContext";
 import { useRouter } from "expo-router";
 
 const menuItems = [
-  { id: "1", name: "番茄炒蛋" },
-  { id: "2", name: "宫保鸡丁" },
-  { id: "3", name: "鱼香肉丝" },
+    { id: "1", name: "番茄炒蛋" },
+    { id: "2", name: "宫保鸡丁" },
+    { id: "3", name: "鱼香肉丝" },
+    { id: "4", name: "麻婆豆腐" },
+    { id: "5", name: "青椒肉丝" },
+        
 ];
 
 export default function MenuScreen() {
@@ -36,10 +39,10 @@ export default function MenuScreen() {
                 )}
                 {quantity > 0 && <Text style={styles.quantity}>{quantity}</Text>}
                 <Pressable
-                  style={styles.button}
-                  onPress={() => addToCart(item)}
+                style={styles.button}
+                onPress={() => addToCart({ ...item, quantity: 1 })}
                 >
-                  <Text style={styles.buttonText}>+</Text>
+                <Text style={styles.buttonText}>+</Text>
                 </Pressable>
               </View>
             </View>
@@ -61,7 +64,7 @@ export default function MenuScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff", padding: 16 },
+  container: { flex: 1, backgroundColor: "#fff", padding: 16,  },
   title: { fontSize: 24, fontWeight: "bold", marginBottom: 20 },
   card: {
     flexDirection: "row",
@@ -87,7 +90,6 @@ const styles = StyleSheet.create({
   buttonText: { color: "#fff", fontSize: 18, fontWeight: "bold" },
   quantity: { fontSize: 16, fontWeight: "600" },
 
-  // ✅ New checkout styles
   checkoutButton: {
     marginTop: 20,
     paddingVertical: 16,
